@@ -1,39 +1,39 @@
 CREATE TABLE Users (
-    user_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Products (
-    product_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     seller_id INT NOT NULL,
-    FOREIGN KEY (seller_id) REFERENCES Users (user_id)
+    FOREIGN KEY (seller_id) REFERENCES Users (id)
 );
 
 CREATE TABLE Sales (
-    sale_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     product_id INT NOT NULL,
     seller_id INT NOT NULL,
     buyer_id INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     sale_date DATE NOT NULL,
-    CONSTRAINT fk_sales_product FOREIGN KEY (product_id) REFERENCES Products (product_id),
-    CONSTRAINT fk_sales_seller FOREIGN KEY (seller_id) REFERENCES Users (user_id),
-    CONSTRAINT fk_sales_buyer FOREIGN KEY (buyer_id) REFERENCES Users (user_id),
+    CONSTRAINT fk_sales_product FOREIGN KEY (product_id) REFERENCES Products (id),
+    CONSTRAINT fk_sales_seller FOREIGN KEY (seller_id) REFERENCES Users (id),
+    CONSTRAINT fk_sales_buyer FOREIGN KEY (buyer_id) REFERENCES Users (id),
     CONSTRAINT chk_seller_buyer CHECK (seller_id <> buyer_id)
 );
 
 CREATE TABLE Reviews (
-    review_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     product_id INT NOT NULL,
     reviewer_id INT NOT NULL,
     rating INT NOT NULL,
     comment TEXT,
-    FOREIGN KEY (product_id) REFERENCES Products (product_id),
-    FOREIGN KEY (reviewer_id) REFERENCES Users (user_id)
+    FOREIGN KEY (product_id) REFERENCES Products (id),
+    FOREIGN KEY (reviewer_id) REFERENCES Users (id)
 );
 
 
