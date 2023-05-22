@@ -1,6 +1,7 @@
 ﻿using Avito.Context;
 
 var connectionString = "Host=localhost;Port=5432;Database=avito;Username=root;Password=root;";
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 using (var dbContext = new AvitoDbContext(connectionString))
 {

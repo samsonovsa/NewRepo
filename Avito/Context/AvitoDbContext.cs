@@ -23,13 +23,11 @@ namespace Avito.Context
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Buyer)
                 .WithMany(u => u.BuyerSales)
-                .HasForeignKey(s => s.BuyerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Seller)
                 .WithMany(u => u.SellerSales)
-                .HasForeignKey(s => s.SellerId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

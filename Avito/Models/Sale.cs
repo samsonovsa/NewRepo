@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Avito.Models
 {
@@ -8,18 +7,10 @@ namespace Avito.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Product")]
-        public int ProductId { get; set; }
         public Product Product { get; set; }
 
-        [ForeignKey("User")]
-        [Column("seller_id")]
-        public int SellerId { get; set; }
         public User Seller { get; set; }
 
-        [ForeignKey("User")]
-        [Column("buyer_id")]
-        public int BuyerId { get; set; }
         public User Buyer { get; set; }
 
         [Required]

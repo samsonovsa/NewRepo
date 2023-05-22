@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Avito.Models
 {
     public class User
     {
-        [Key]
+        [Key, Column("id")]
         public int Id { get; set; }
 
         [Required]
@@ -17,7 +18,6 @@ namespace Avito.Models
         public string Password { get; set; }
 
         public ICollection<Product> Products { get; set; }
-        public ICollection<Sale> Sales { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Sale> BuyerSales { get; set; }
         public ICollection<Sale> SellerSales { get; set; }
