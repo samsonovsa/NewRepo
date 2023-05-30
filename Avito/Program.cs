@@ -1,7 +1,9 @@
 ﻿using Avito.Context;
+using Avito.Models;
 
 var connectionString = "Host=localhost;Port=5432;Database=avito;Username=root;Password=root;";
-Console.OutputEncoding = System.Text.Encoding.UTF8;
+Console.OutputEncoding = System.Text.Encoding.Unicode;
+Console.InputEncoding = System.Text.Encoding.Unicode;
 
 using (var dbContext = new AvitoDbContext(connectionString))
 {
@@ -9,6 +11,8 @@ using (var dbContext = new AvitoDbContext(connectionString))
     ShowProucts(dbContext);
     ShowSales(dbContext);
     ShowReviews(dbContext);
+    SetUser(dbContext);
+    ShowUsers(dbContext);
 }
 
 static void ShowUsers(AvitoDbContext dbContext)
@@ -67,4 +71,24 @@ static void ShowReviews(AvitoDbContext dbContext)
             $"Комментарий: {review.Comment}");
     }
     Console.WriteLine();
+}
+
+void SetUser(AvitoDbContext dbContext)
+{
+    Console.WriteLine("Введите нового пользователя:");
+    Console.Write("Введите имя нового пользователя: ");
+    string name = Console.ReadLine() ?? "Default Name";
+    Console.Write("Введите email нового пользователя: ");
+    string email = Console.ReadLine() ?? "default@mail.ru";
+    Console.Write("Введите пароль для нового пользователя: ");
+    string password = Console.ReadLine() ?? "DefaultPassword";
+
+    dbContext.Users.Add(new User
+    {
+        Username = name,
+        Email = email,
+        Password = password
+    });
+
+    dbContext.SaveChanges();
 }
